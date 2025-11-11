@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bizerrant specializes in scaling businesses and product sales through Facebook and Instagram sponsored ads. Get expert ad management today."
+    />
+    <title>Bizerrant - Scale Your Business with Facebook & Instagram Ads</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1a73e8",
+              "primary-dark": "#0d47a1",
+              "dark-bg": "#121212",
+              "dark-card": "#1e1e1e",
+              "dark-text": "#e0e0e0",
+              "dark-border": "#333",
+              accent: "#64b5f6",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :root {
+        --primary: #1a73e8;
+        --primary-dark: #0d47a1;
+        --dark-bg: "#121212";
+        --dark-card: "#1e1e1e";
+        --dark-text: "#e0e0e0";
+        --dark-border: "#333";
+        --accent: "#64b5f6";
+      }
+
+      /* Custom styles for enhanced interactivity */
+      .package-card {
+        transition: all 0.3s ease;
+        flex: 0 0 auto;
+        width: 320px;
+      }
+
+      .package-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .featured-package {
+        border: 2px solid var(--primary);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .featured-badge {
+        position: absolute;
+        top: 15px;
+        right: -30px;
+        background-color: var(--primary);
+        color: white;
+        padding: 5px 30px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        transform: rotate(45deg);
+      }
+
+      .cart-panel {
+        transition: all 0.3s ease;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .slide-in {
+        animation: slideIn 0.5s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .admin-panel {
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+      }
+
+      /* Image slider styles */
+      .slider {
+        position: relative;
+        height: 100vh;
+        min-height: 700px;
+        overflow: hidden;
+      }
+
+      .slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .slide {
+        min-width: 100%;
+        height: 100vh;
+        min-height: 700px;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      .prev {
+        left: 10px;
+      }
+
+      .next {
+        right: 10px;
+      }
+
+      .slider-dots {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+      }
+
+      .dot.active {
+        background: white;
+      }
+
+      /* Packages slider */
+      .packages-slider {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .packages-container {
+        display: flex;
+        gap: 30px;
+        transition: transform 0.5s ease;
+        padding: 10px 0;
+      }
+
+      .package-slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--primary);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .package-slider-btn:hover {
+        background: var(--primary-dark);
+      }
+
+      .package-prev {
+        left: 10px;
+      }
+
+      .package-next {
+        right: 10px;
+      }
+
+      .package-slider-dots {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .package-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #cbd5e0;
+        cursor: pointer;
+      }
+
+      .package-dot.active {
+        background: var(--primary);
+      }
+
+      /* Password modal */
+      .password-modal {
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+      }
+
+      .password-input {
+        letter-spacing: 3px;
+        font-family: monospace;
+        font-size: 1.2rem;
+      }
+
+      /* Hero content styles */
+      .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 1200px;
+        z-index: 5;
+      }
+
+      .hero-text {
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 3rem;
+        max-width: 800px;
+        margin: 0 auto;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .hero-highlight {
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+
+      .hero-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .hero-feature {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+      }
+
+      .hero-feature i {
+        margin-right: 0.5rem;
+        color: var(--primary);
+      }
+
+      @media (max-width: 768px) {
+        .hero-content {
+          width: 95%;
+        }
+
+        .hero-text {
+          padding: 2rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .hero-features {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-50 dark:bg-dark-bg text-gray-800 dark:text-dark-text transition-colors duration-300"
+  >
+    <!-- Password Modal -->
+    <div
+      id="password-modal"
+      class="password-modal fixed inset-0 flex items-center justify-center z-50 hidden"
+    >
+      <div
+        class="bg-white dark:bg-dark-card rounded-lg shadow-xl w-full max-w-md mx-4 p-6"
+      >
+        <div class="text-center mb-6">
+          <i class="fas fa-lock text-4xl text-primary mb-4"></i>
+          <h3 class="text-2xl font-bold">Admin Access</h3>
+          <p class="text-gray-600 dark:text-gray-400 mt-2">
+            Enter passcode to access admin panel
+          </p>
+        </div>
+
+        <div class="mb-6">
+          <input
+            type="password"
+            id="password-input"
+            class="password-input w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg text-center focus:outline-none focus:ring-2 focus:ring-primary"
+            maxlength="7"
+            placeholder="Enter passcode"
+          />
+          <p
+            id="password-error"
+            class="text-red-500 text-sm mt-2 text-center hidden"
+          >
+            Incorrect passcode. Please try again.
+          </p>
+        </div>
+
+        <div class="flex justify-center space-x-4">
+          <button
+            id="submit-password"
+            class="bg-primary hover:bg-primary-dark text-white px-6 py-2 rounded-lg font-medium transition-colors"
+          >
+            Submit
+          </button>
+          <button
+            id="cancel-password"
+            class="bg-gray-300 hover:bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-2 rounded-lg font-medium transition-colors"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Panel (Hidden by default) -->
+    <div
+      id="admin-panel"
+      class="admin-panel fixed top-0 left-0 w-full h-full z-40 hidden flex-col p-6 overflow-y-auto"
+    >
+      <div
+        class="bg-white dark:bg-dark-card rounded-lg shadow-xl max-w-4xl mx-auto w-full p-6"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold">Bizerrant Admin Panel</h2>
+          <button
+            id="close-admin"
+            class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          >
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Manage Packages</h3>
+            <div id="package-editor" class="space-y-4">
+              <!-- Package editor will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Manage Site Content</h3>
+            <div class="space-y-4">
+              <div>
+                <label class="block mb-2">Hero Slider Images</label>
+                <input
+                  type="file"
+                  id="slider-images"
+                  multiple
+                  class="w-full p-2 border rounded dark:bg-dark-card dark:border-dark-border"
+                />
+                <button
+                  id="update-slider"
+                  class="mt-2 bg-primary text-white px-4 py-2 rounded"
+                >
+                  Update Slider
+                </button>
+              </div>
+
+              <div>
+                <label class="block mb-2">About Section Image</label>
+                <input
+                  type="file"
+                  id="about-image"
+                  class="w-full p-2 border rounded dark:bg-dark-card dark:border-dark-border"
+                />
+                <button
+                  id="update-about"
+                  class="mt-2 bg-primary text-white px-4 py-2 rounded"
+                >
+                  Update About Image
+                </button>
+              </div>
+
+              <div>
+                <label class="block mb-2">Video Section Thumbnail</label>
+                <input
+                  type="file"
+                  id="video-thumbnail"
+                  class="w-full p-2 border rounded dark:bg-dark-card dark:border-dark-border"
+                />
+                <button
+                  id="update-video"
+                  class="mt-2 bg-primary text-white px-4 py-2 rounded"
+                >
+                  Update Video Thumbnail
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <h3 class="text-xl font-semibold mb-4">Contact Information</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block mb-2">WhatsApp Number</label>
+              <input
+                type="text"
+                id="whatsapp-number"
+                value="07077175192"
+                class="w-full p-2 border rounded dark:bg-dark-card dark:border-dark-border"
+              />
+            </div>
+            <div>
+              <label class="block mb-2">Call Number</label>
+              <input
+                type="text"
+                id="call-number"
+                value="07044697861"
+                class="w-full p-2 border rounded dark:bg-dark-card dark:border-dark-border"
+              />
+            </div>
+            <div>
+              <label class="block mb-2">Email 1</label>
+              <input
+                type="email"
+                id="email-1"
+                value="bizerrantng@gmail.com"
+                class="w-full p-2 border rounded dark:bg-dark-card dark:border-dark-border"
+              />
+            </div>
+            <div>
+              <label class="block mb-2">Email 2</label>
+              <input
+                type="email"
+                id="email-2"
+                value="help@bizerrant.com.ng"
+                class="w-full p-2 border rounded dark:bg-dark-card dark:border-dark-border"
+              />
+            </div>
+          </div>
+          <button
+            id="update-contact"
+            class="mt-4 bg-primary text-white px-4 py-2 rounded"
+          >
+            Update Contact Info
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-dark-bg shadow-md fixed w-full top-0 z-30">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <i class="fas fa-rocket text-primary text-2xl mr-2"></i>
+            <h1 class="text-2xl font-bold text-primary">Bizerrant</h1>
+          </div>
+
+          <nav class="hidden md:flex space-x-8">
+            <a
+              href="#services"
+              class="font-medium hover:text-primary transition-colors"
+              >Services</a
+            >
+            <a
+              href="#packages"
+              class="font-medium hover:text-primary transition-colors"
+              >Packages</a
+            >
+            <a
+              href="#about"
+              class="font-medium hover:text-primary transition-colors"
+              >About</a
+            >
+            <a
+              href="#videos"
+              class="font-medium hover:text-primary transition-colors"
+              >Videos</a
+            >
+            <a
+              href="#contact"
+              class="font-medium hover:text-primary transition-colors"
+              >Contact</a
+            >
+          </nav>
+
+          <div class="flex items-center space-x-4">
+            <button
+              id="theme-toggle"
+              class="p-2 rounded-full bg-gray-200 dark:bg-dark-card hover:bg-gray-300 dark:hover:bg-dark-border transition-colors"
+            >
+              <i class="fas fa-moon text-gray-700 dark:text-yellow-400"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section with Slider -->
+    <section class="pt-0">
+      <div class="slider relative">
+        <div class="slides">
+          <div
+            class="slide bg-cover bg-center"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1415&q=80');
+            "
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"
+            ></div>
+          </div>
+          <div
+            class="slide bg-cover bg-center"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            "
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"
+            ></div>
+          </div>
+          <div
+            class="slide bg-cover bg-center"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            "
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Hero Content Floating Above Images -->
+        <div class="hero-content">
+          <div class="hero-text text-white text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+              <span class="hero-highlight">Scale Your Business</span> with
+              Expert
+            </h1>
+            <h2 class="text-3xl md:text-5xl font-bold mb-8">
+              Facebook & Instagram Ads
+            </h2>
+
+            <p class="hero-subtitle">
+              We specialize in driving
+              <span class="font-bold text-accent">explosive growth</span> for
+              e-commerce brands through strategic Facebook and Instagram
+              advertising. Let us scale your sales while you focus on your
+              business.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+              <a
+                href="#packages"
+                class="bg-primary hover:bg-primary-dark text-white font-bold py-4 px-8 rounded-full text-lg transition-colors inline-flex items-center justify-center"
+              >
+                <i class="fas fa-chart-line mr-2"></i> View Our Packages
+              </a>
+              <a
+                href="#contact"
+                class="bg-transparent hover:bg-white/10 text-white border-2 border-white font-bold py-4 px-8 rounded-full text-lg transition-colors inline-flex items-center justify-center"
+              >
+                <i class="fas fa-calendar-check mr-2"></i> Book Free
+                Consultation
+              </a>
+            </div>
+
+            <div class="hero-features justify-center mt-10">
+              <div class="hero-feature">
+                <i class="fas fa-bullseye"></i>
+                <span>Precise Audience Targeting</span>
+              </div>
+              <div class="hero-feature">
+                <i class="fas fa-chart-line"></i>
+                <span>Proven ROI Strategies</span>
+              </div>
+              <div class="hero-feature">
+                <i class="fas fa-rocket"></i>
+                <span>Rapid Business Growth</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="slider-btn prev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="slider-btn next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div class="slider-dots">
+          <span class="dot active" data-slide="0"></span>
+          <span class="dot" data-slide="1"></span>
+          <span class="dot" data-slide="2"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white dark:bg-dark-bg">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+          <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            We offer comprehensive Facebook and Instagram advertising solutions
+            tailored to your business needs.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div
+            class="bg-gray-50 dark:bg-dark-card rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
+          >
+            <div class="text-primary text-3xl mb-4">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Audience Targeting</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Precise targeting to reach your ideal customers based on
+              demographics, interests, and behaviors.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-50 dark:bg-dark-card rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
+          >
+            <div class="text-primary text-3xl mb-4">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Ad Campaign Management</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Strategic campaign setup, optimization, and monitoring to maximize
+              your return on ad spend.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-50 dark:bg-dark-card rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
+          >
+            <div class="text-primary text-3xl mb-4">
+              <i class="fas fa-paint-brush"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Creative Development</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Eye-catching ad creatives and compelling copy that converts
+              viewers into customers.
+            </p>
+          </div>
+
+          <div
+            class="bg-gray-50 dark:bg-dark-card rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
+          >
+            <div class="text-primary text-3xl mb-4">
+              <i class="fas fa-analytics"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3">Performance Analytics</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Detailed reporting and insights to track performance and identify
+              growth opportunities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Packages Section with Horizontal Slider -->
+    <section id="packages" class="py-16 bg-gray-100 dark:bg-dark-card">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Advertising Packages
+          </h2>
+          <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Choose the package that best fits your business needs and budget.
+          </p>
+        </div>
+
+        <div class="packages-slider relative">
+          <button class="package-slider-btn package-prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <div
+            class="packages-container overflow-x-auto pb-4"
+            id="packages-container"
+          >
+            <!-- Packages will be loaded dynamically from JavaScript -->
+          </div>
+
+          <button class="package-slider-btn package-next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+          <div class="package-slider-dots" id="package-dots">
+            <!-- Dots will be generated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white dark:bg-dark-bg">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center gap-12">
+          <div class="lg:w-1/2">
+            <img
+              src="https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+              alt="About Bizerrant"
+              class="rounded-lg shadow-lg w-full"
+            />
+          </div>
+
+          <div class="lg:w-1/2">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">About Bizerrant</h2>
+            <p class="text-lg mb-4 text-gray-600 dark:text-gray-400">
+              Bizerrant is a premier digital marketing agency specializing in
+              scaling businesses through strategic Facebook and Instagram
+              advertising. Founded in 2020, we've helped over 200 businesses
+              achieve remarkable growth in their online sales.
+            </p>
+
+            <p class="text-lg mb-4 text-gray-600 dark:text-gray-400">
+              Our team consists of certified Facebook Ads experts with years of
+              experience in e-commerce marketing, audience targeting, and
+              conversion optimization. We stay at the forefront of digital
+              advertising trends to ensure our clients get the best possible
+              results.
+            </p>
+
+            <p class="text-lg mb-6 text-gray-600 dark:text-gray-400">
+              We believe in transparent, data-driven marketing strategies that
+              deliver measurable ROI. Whether you're just starting with social
+              media advertising or looking to scale your existing efforts,
+              Bizerrant has the expertise to take your business to the next
+              level.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+              <div class="bg-primary text-white px-4 py-2 rounded-lg">
+                <span class="font-bold">200+</span> Clients Served
+              </div>
+              <div class="bg-primary text-white px-4 py-2 rounded-lg">
+                <span class="font-bold">5M+</span> In Revenue Generated
+              </div>
+              <div class="bg-primary text-white px-4 py-2 rounded-lg">
+                <span class="font-bold">98%</span> Client Satisfaction
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="videos" class="py-16 bg-gray-100 dark:bg-dark-card">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            Explainer & Ad Videos
+          </h2>
+          <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Watch our video content to learn more about our services and see
+            examples of our work.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="bg-white dark:bg-dark-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+          >
+            <div class="relative pb-[56.25%] h-0 bg-gray-300 dark:bg-gray-700">
+              <img
+                src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80"
+                alt="Video Thumbnail"
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <button
+                  class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center hover:bg-primary-dark transition-colors"
+                >
+                  <i class="fas fa-play text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">
+                How We Scale E-commerce Businesses
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                Learn about our proven strategies for scaling online stores with
+                Facebook and Instagram ads.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white dark:bg-dark-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+          >
+            <div class="relative pb-[56.25%] h-0 bg-gray-300 dark:bg-gray-700">
+              <img
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80"
+                alt="Video Thumbnail"
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <button
+                  class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center hover:bg-primary-dark transition-colors"
+                >
+                  <i class="fas fa-play text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">
+                Creating High-Converting Ad Creatives
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                Discover the elements that make our ad creatives stand out and
+                drive conversions.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-white dark:bg-dark-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+          >
+            <div class="relative pb-[56.25%] h-0 bg-gray-300 dark:bg-gray-700">
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                alt="Video Thumbnail"
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 flex items-center justify-center">
+                <button
+                  class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center hover:bg-primary-dark transition-colors"
+                >
+                  <i class="fas fa-play text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Client Success Stories</h3>
+              <p class="text-gray-600 dark:text-gray-400">
+                Hear from our clients about how Bizerrant helped them achieve
+                remarkable growth.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WhatsApp Contact Form -->
+    <section id="whatsapp-contact" class="py-16 bg-white dark:bg-dark-bg">
+      <div class="container mx-auto px-4">
+        <div
+          class="max-w-3xl mx-auto bg-gray-50 dark:bg-dark-card rounded-lg shadow-lg p-8"
+        >
+          <h2 class="text-3xl font-bold mb-6 text-center">
+            Special Request? Contact Us via WhatsApp
+          </h2>
+
+          <form id="whatsapp-form" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block mb-2 font-medium"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+
+              <div>
+                <label for="phone" class="block mb-2 font-medium"
+                  >Phone Number</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  required
+                  class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="email" class="block mb-2 font-medium"
+                >Email Address</label
+              >
+              <input
+                type="email"
+                id="email"
+                required
+                class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+
+            <div>
+              <label for="business" class="block mb-2 font-medium"
+                >Business Name</label
+              >
+              <input
+                type="text"
+                id="business"
+                class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="block mb-2 font-medium"
+                >Your Message</label
+              >
+              <textarea
+                id="message"
+                rows="4"
+                class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="hear-about" class="block mb-2 font-medium"
+                >How did you hear about us?</label
+              >
+              <select
+                id="hear-about"
+                class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+              >
+                <option value="">Select an option</option>
+                <option value="social-media">Social Media</option>
+                <option value="search-engine">Search Engine</option>
+                <option value="friend-referral">Friend Referral</option>
+                <option value="client-referral">Client Referral</option>
+                <option value="advertisement">Advertisement</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+            >
+              <i class="fab fa-whatsapp mr-2"></i> Send via WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Shopping Cart -->
+    <div class="fixed bottom-6 right-6 z-30">
+      <div class="relative">
+        <button
+          id="cart-toggle"
+          class="bg-primary hover:bg-primary-dark text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-colors"
+        >
+          <i class="fas fa-shopping-bag text-xl"></i>
+          <span
+            id="cart-count"
+            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center"
+            >0</span
+          >
+        </button>
+
+        <div
+          id="cart-panel"
+          class="absolute bottom-16 right-0 w-80 bg-white dark:bg-dark-card rounded-lg shadow-xl border border-gray-200 dark:border-dark-border hidden"
+        >
+          <div
+            class="p-4 border-b border-gray-200 dark:border-dark-border flex justify-between items-center"
+          >
+            <h3 class="font-bold text-lg">Your Cart</h3>
+            <button
+              id="close-cart"
+              class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <div id="cart-items" class="max-h-80 overflow-y-auto p-4">
+            <!-- Cart items will be added here dynamically -->
+            <p id="empty-cart-message" class="text-center text-gray-500 py-4">
+              Your cart is empty
+            </p>
+          </div>
+
+          <div class="p-4 border-t border-gray-200 dark:border-dark-border">
+            <div class="flex justify-between items-center mb-4">
+              <span class="font-bold">Total:</span>
+              <span id="cart-total" class="font-bold text-primary">₦0</span>
+            </div>
+            <button
+              id="checkout-btn"
+              class="w-full bg-primary hover:bg-primary-dark text-white py-2 rounded-lg font-medium transition-colors"
+            >
+              Proceed to Checkout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a
+      href="https://wa.me/2347077175192"
+      target="_blank"
+      class="fixed bottom-6 left-6 bg-green-600 hover:bg-green-700 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-colors z-30"
+    >
+      <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Checkout Modal -->
+    <div
+      id="checkout-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40 hidden"
+    >
+      <div
+        class="bg-white dark:bg-dark-card rounded-lg shadow-xl w-full max-w-md mx-4"
+      >
+        <div
+          class="p-6 border-b border-gray-200 dark:border-dark-border flex justify-between items-center"
+        >
+          <h3 class="text-xl font-bold">Complete Your Purchase</h3>
+          <button
+            id="close-checkout"
+            class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <form id="checkout-form" class="p-6 space-y-4">
+          <div>
+            <label for="checkout-name" class="block mb-2 font-medium"
+              >Full Name</label
+            >
+            <input
+              type="text"
+              id="checkout-name"
+              required
+              class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+
+          <div>
+            <label for="checkout-email" class="block mb-2 font-medium"
+              >Email Address</label
+            >
+            <input
+              type="email"
+              id="checkout-email"
+              required
+              class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+
+          <div>
+            <label for="checkout-phone" class="block mb-2 font-medium"
+              >Phone Number</label
+            >
+            <input
+              type="tel"
+              id="checkout-phone"
+              required
+              class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+
+          <div>
+            <label for="checkout-business" class="block mb-2 font-medium"
+              >Business Name</label
+            >
+            <input
+              type="text"
+              id="checkout-business"
+              class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+          </div>
+
+          <div>
+            <label for="checkout-message" class="block mb-2 font-medium"
+              >Additional Information</label
+            >
+            <textarea
+              id="checkout-message"
+              rows="3"
+              class="w-full p-3 border border-gray-300 dark:border-dark-border rounded-lg dark:bg-dark-bg focus:outline-none focus:ring-2 focus:ring-primary"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg font-medium transition-colors"
+          >
+            Complete Purchase via WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer with Admin Settings -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-white py-12 relative">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">Bizerrant</h3>
+            <p class="text-gray-400">
+              We specialize in scaling businesses through strategic Facebook and
+              Instagram advertising solutions.
+            </p>
+            <div class="flex space-x-4 mt-4">
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+              >
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a
+                href="#"
+                class="text-gray-400 hover:text-white transition-colors"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#packages"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Packages</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#videos"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Videos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li class="flex items-center">
+                <i class="fas fa-envelope mr-2"></i>
+                <span>bizerrantng@gmail.com</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-envelope mr-2"></i>
+                <span>help@bizerrant.com.ng</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fab fa-whatsapp mr-2"></i>
+                <span>07077175192</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone mr-2"></i>
+                <span>07044697861</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Newsletter</h4>
+            <p class="text-gray-400 mb-4">
+              Subscribe to our newsletter for marketing tips and updates.
+            </p>
+            <form class="flex">
+              <input
+                type="email"
+                placeholder="Your email"
+                class="px-3 py-2 bg-gray-700 text-white rounded-l-lg focus:outline-none w-full"
+              />
+              <button
+                type="submit"
+                class="bg-primary hover:bg-primary-dark px-4 py-2 rounded-r-lg transition-colors"
+              >
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 relative"
+        >
+          <p>&copy; 2023 Bizerrant. All rights reserved.</p>
+
+          <!-- Admin Settings Button in Footer -->
+          <button
+            id="admin-settings"
+            class="absolute right-0 bottom-0 bg-gray-700 hover:bg-gray-600 text-white p-3 rounded-full transition-colors"
+          >
+            <i class="fas fa-cog text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Package Data
+      const packages = [
+        {
+          id: 1,
+          name: "Starter Plan",
+          price: 35000,
+          duration: "1 month",
+          features: [
+            "Page Growth Strategy",
+            "WhatsApp Funnel Creation",
+            "Ad Copy & Creative",
+            "Basic Audience Targeting",
+            "Performance Report",
+          ],
+          featured: false,
+        },
+        {
+          id: 2,
+          name: "Mini Plan",
+          price: 55000,
+          duration: "1 week",
+          features: [
+            "Page Growth Strategy",
+            "WhatsApp Funnel Creation",
+            "Ad Copy & Creative",
+            "Advanced Audience Targeting",
+            "Daily Performance Monitoring",
+          ],
+          featured: false,
+        },
+        {
+          id: 3,
+          name: "Midi Plan",
+          price: 80000,
+          duration: "2 weeks",
+          features: [
+            "Page Growth Strategy",
+            "Followers Growth",
+            "WhatsApp Funnel Creation",
+            "Ad Copy & Creative",
+            "A/B Testing",
+            "Detailed Analytics",
+          ],
+          featured: true,
+        },
+        {
+          id: 4,
+          name: "Maxi Plan",
+          price: 105000,
+          duration: "1 month",
+          features: [
+            "Page Growth Strategy",
+            "Followers Growth",
+            "WhatsApp Funnel Creation",
+            "Ad Copy & Creative",
+            "Multi-Variant Testing",
+            "Real-time Optimization",
+            "Weekly Strategy Calls",
+          ],
+          featured: false,
+        },
+        {
+          id: 5,
+          name: "Mega Plan",
+          price: 200000,
+          duration: "2 months",
+          features: [
+            "Complete Page Management",
+            "Followers Growth Strategy",
+            "WhatsApp Funnel Creation",
+            "Ad Copy & Creative",
+            "Advanced A/B Testing",
+            "Real-time Optimization",
+            "Bi-weekly Strategy Calls",
+            "Competitor Analysis",
+          ],
+          featured: false,
+        },
+        {
+          id: 6,
+          name: "Mili Plan",
+          price: 500000,
+          duration: "6 months",
+          features: [
+            "Complete Page Management",
+            "Ad Copies Creation",
+            "WhatsApp Funnel Creation",
+            "Multi-platform Strategy",
+            "Advanced Analytics Dashboard",
+            "Monthly Strategy Calls",
+            "Dedicated Account Manager",
+          ],
+          featured: false,
+        },
+        {
+          id: 7,
+          name: "Deca Plan",
+          price: 1000000,
+          duration: "8 months",
+          features: [
+            "Complete Page Management",
+            "Ad Copies Creation",
+            "WhatsApp Funnel Creation",
+            "Facebook Pixel Setup",
+            "Sales Page Development",
+            "Multi-platform Strategy",
+            "Advanced Analytics Dashboard",
+            "Bi-weekly Strategy Calls",
+            "Dedicated Account Manager",
+            "Priority Support",
+          ],
+          featured: false,
+        },
+      ];
+
+      // Shopping Cart
+      let cart = [];
+      let currentSlide = 0;
+      const slideCount = 3;
+      let slideInterval;
+
+      // Package Slider
+      let currentPackageSlide = 0;
+      const packagesPerSlide = 3;
+      const totalPackageSlides = Math.ceil(packages.length / packagesPerSlide);
+
+      // DOM Elements
+      const themeToggle = document.getElementById("theme-toggle");
+      const adminSettings = document.getElementById("admin-settings");
+      const passwordModal = document.getElementById("password-modal");
+      const adminPanel = document.getElementById("admin-panel");
+      const closeAdmin = document.getElementById("close-admin");
+      const packagesContainer = document.getElementById("packages-container");
+      const packageDots = document.getElementById("package-dots");
+      const cartToggle = document.getElementById("cart-toggle");
+      const cartPanel = document.getElementById("cart-panel");
+      const closeCart = document.getElementById("close-cart");
+      const cartCount = document.getElementById("cart-count");
+      const cartItems = document.getElementById("cart-items");
+      const emptyCartMessage = document.getElementById("empty-cart-message");
+      const cartTotal = document.getElementById("cart-total");
+      const checkoutBtn = document.getElementById("checkout-btn");
+      const checkoutModal = document.getElementById("checkout-modal");
+      const closeCheckout = document.getElementById("close-checkout");
+      const checkoutForm = document.getElementById("checkout-form");
+      const whatsappForm = document.getElementById("whatsapp-form");
+      const slider = document.querySelector(".slides");
+      const prevBtn = document.querySelector(".prev");
+      const nextBtn = document.querySelector(".next");
+      const dots = document.querySelectorAll(".dot");
+      const packagePrevBtn = document.querySelector(".package-prev");
+      const packageNextBtn = document.querySelector(".package-next");
+      const passwordInput = document.getElementById("password-input");
+      const submitPassword = document.getElementById("submit-password");
+      const cancelPassword = document.getElementById("cancel-password");
+      const passwordError = document.getElementById("password-error");
+
+      // Initialize the page
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load packages
+        renderPackages();
+        updatePackageSlider();
+
+        // Initialize theme
+        if (localStorage.getItem("theme") === "dark") {
+          document.documentElement.classList.add("dark");
+          themeToggle.innerHTML = '<i class="fas fa-sun text-yellow-400"></i>';
+        }
+
+        // Initialize slider
+        startSlider();
+
+        // Add event listeners
+        setupEventListeners();
+      });
+
+      // Render packages to the page
+      function renderPackages() {
+        packagesContainer.innerHTML = "";
+
+        packages.forEach((pkg) => {
+          const packageCard = document.createElement("div");
+          packageCard.className = `package-card bg-white dark:bg-dark-bg rounded-lg shadow-md overflow-hidden ${
+            pkg.featured ? "featured-package" : ""
+          }`;
+
+          packageCard.innerHTML = `
+                    ${
+                      pkg.featured
+                        ? '<div class="featured-badge">POPULAR</div>'
+                        : ""
+                    }
+                    <div class="p-6 border-b border-gray-200 dark:border-dark-border">
+                        <h3 class="text-xl font-bold mb-2">${pkg.name}</h3>
+                        <div class="text-3xl font-bold text-primary mb-2">₦${pkg.price.toLocaleString()}</div>
+                        <div class="text-gray-600 dark:text-gray-400">${
+                          pkg.duration
+                        }</div>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-3 mb-6">
+                            ${pkg.features
+                              .map(
+                                (feature) => `<li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-2"></i>
+                                <span>${feature}</span>
+                            </li>`
+                              )
+                              .join("")}
+                        </ul>
+                        <button class="add-to-cart w-full bg-primary hover:bg-primary-dark text-white py-2 rounded-lg font-medium transition-colors" data-id="${
+                          pkg.id
+                        }">
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+
+          packagesContainer.appendChild(packageCard);
+        });
+
+        // Add event listeners to Add to Cart buttons
+        document.querySelectorAll(".add-to-cart").forEach((button) => {
+          button.addEventListener("click", function () {
+            const packageId = parseInt(this.getAttribute("data-id"));
+            addToCart(packageId);
+          });
+        });
+      }
+
+      // Update package slider position
+      function updatePackageSlider() {
+        const translateX = -currentPackageSlide * (320 + 30); // card width + gap
+        packagesContainer.style.transform = `translateX(${translateX}px)`;
+
+        // Update dots
+        packageDots.innerHTML = "";
+        for (let i = 0; i < totalPackageSlides; i++) {
+          const dot = document.createElement("span");
+          dot.className = `package-dot ${
+            i === currentPackageSlide ? "active" : ""
+          }`;
+          dot.setAttribute("data-slide", i);
+          packageDots.appendChild(dot);
+
+          dot.addEventListener("click", function () {
+            const slideIndex = parseInt(this.getAttribute("data-slide"));
+            goToPackageSlide(slideIndex);
+          });
+        }
+      }
+
+      function nextPackageSlide() {
+        if (currentPackageSlide < totalPackageSlides - 1) {
+          currentPackageSlide++;
+          updatePackageSlider();
+        }
+      }
+
+      function prevPackageSlide() {
+        if (currentPackageSlide > 0) {
+          currentPackageSlide--;
+          updatePackageSlider();
+        }
+      }
+
+      function goToPackageSlide(slideIndex) {
+        currentPackageSlide = slideIndex;
+        updatePackageSlider();
+      }
+
+      // Shopping Cart Functions
+      function addToCart(packageId) {
+        const package = packages.find((p) => p.id === packageId);
+        if (!package) return;
+
+        // Check if item already in cart
+        const existingItem = cart.find((item) => item.id === packageId);
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cart.push({
+            id: package.id,
+            name: package.name,
+            price: package.price,
+            quantity: 1,
+          });
+        }
+
+        updateCart();
+        cartPanel.classList.remove("hidden");
+      }
+
+      function updateCart() {
+        // Update cart count
+        const totalItems = cart.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+        cartCount.textContent = totalItems;
+
+        // Update cart items
+        cartItems.innerHTML = "";
+
+        if (cart.length === 0) {
+          emptyCartMessage.classList.remove("hidden");
+          checkoutBtn.disabled = true;
+        } else {
+          emptyCartMessage.classList.add("hidden");
+          checkoutBtn.disabled = false;
+
+          cart.forEach((item) => {
+            const cartItem = document.createElement("div");
+            cartItem.className =
+              "flex justify-between items-center py-3 border-b border-gray-200 dark:border-dark-border";
+            cartItem.innerHTML = `
+                        <div>
+                            <h4 class="font-medium">${item.name}</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">₦${item.price.toLocaleString()} x ${
+              item.quantity
+            }</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="font-bold mr-4">₦${(
+                              item.price * item.quantity
+                            ).toLocaleString()}</span>
+                            <button class="remove-item text-red-500 hover:text-red-700" data-id="${
+                              item.id
+                            }">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+            cartItems.appendChild(cartItem);
+          });
+
+          // Add event listeners to remove buttons
+          document.querySelectorAll(".remove-item").forEach((button) => {
+            button.addEventListener("click", function () {
+              const itemId = parseInt(this.getAttribute("data-id"));
+              removeFromCart(itemId);
+            });
+          });
+        }
+
+        // Update total
+        const total = cart.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
+        cartTotal.textContent = `₦${total.toLocaleString()}`;
+      }
+
+      function removeFromCart(itemId) {
+        cart = cart.filter((item) => item.id !== itemId);
+        updateCart();
+      }
+
+      // Slider Functions
+      function startSlider() {
+        slideInterval = setInterval(nextSlide, 5000);
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slideCount;
+        updateSlider();
+      }
+
+      function prevSlide() {
+        currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+        updateSlider();
+      }
+
+      function updateSlider() {
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+        // Update dots
+        dots.forEach((dot, index) => {
+          if (index === currentSlide) {
+            dot.classList.add("active");
+          } else {
+            dot.classList.remove("active");
+          }
+        });
+      }
+
+      function goToSlide(slideIndex) {
+        currentSlide = slideIndex;
+        updateSlider();
+        resetInterval();
+      }
+
+      function resetInterval() {
+        clearInterval(slideInterval);
+        startSlider();
+      }
+
+      // Password verification
+      function verifyPassword() {
+        const enteredPassword = passwordInput.value;
+        if (enteredPassword === "440012A") {
+          passwordModal.classList.add("hidden");
+          adminPanel.classList.remove("hidden");
+          adminPanel.classList.add("flex");
+          passwordInput.value = "";
+          passwordError.classList.add("hidden");
+        } else {
+          passwordError.classList.remove("hidden");
+          passwordInput.value = "";
+        }
+      }
+
+      // Setup Event Listeners
+      function setupEventListeners() {
+        // Theme toggle
+        themeToggle.addEventListener("click", function () {
+          document.documentElement.classList.toggle("dark");
+
+          if (document.documentElement.classList.contains("dark")) {
+            localStorage.setItem("theme", "dark");
+            themeToggle.innerHTML =
+              '<i class="fas fa-sun text-yellow-400"></i>';
+          } else {
+            localStorage.setItem("theme", "light");
+            themeToggle.innerHTML = '<i class="fas fa-moon text-gray-700"></i>';
+          }
+        });
+
+        // Admin panel
+        adminSettings.addEventListener("click", function () {
+          passwordModal.classList.remove("hidden");
+        });
+
+        closeAdmin.addEventListener("click", function () {
+          adminPanel.classList.add("hidden");
+          adminPanel.classList.remove("flex");
+        });
+
+        // Password modal
+        submitPassword.addEventListener("click", verifyPassword);
+
+        cancelPassword.addEventListener("click", function () {
+          passwordModal.classList.add("hidden");
+          passwordInput.value = "";
+          passwordError.classList.add("hidden");
+        });
+
+        passwordInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            verifyPassword();
+          }
+        });
+
+        // Shopping cart
+        cartToggle.addEventListener("click", function () {
+          cartPanel.classList.toggle("hidden");
+        });
+
+        closeCart.addEventListener("click", function () {
+          cartPanel.classList.add("hidden");
+        });
+
+        // Checkout
+        checkoutBtn.addEventListener("click", function () {
+          if (cart.length === 0) return;
+          checkoutModal.classList.remove("hidden");
+        });
+
+        closeCheckout.addEventListener("click", function () {
+          checkoutModal.classList.add("hidden");
+        });
+
+        // Checkout form submission
+        checkoutForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("checkout-name").value;
+          const email = document.getElementById("checkout-email").value;
+          const phone = document.getElementById("checkout-phone").value;
+          const business = document.getElementById("checkout-business").value;
+          const message = document.getElementById("checkout-message").value;
+
+          // Create WhatsApp message
+          let whatsappMessage = `Hello Bizerrant!%0A%0A`;
+          whatsappMessage += `I would like to purchase the following:%0A`;
+
+          cart.forEach((item) => {
+            whatsappMessage += `- ${
+              item.name
+            } (₦${item.price.toLocaleString()}) x ${item.quantity}%0A`;
+          });
+
+          const total = cart.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+          );
+          whatsappMessage += `%0ATotal: ₦${total.toLocaleString()}%0A%0A`;
+          whatsappMessage += `My details:%0A`;
+          whatsappMessage += `Name: ${name}%0A`;
+          whatsappMessage += `Email: ${email}%0A`;
+          whatsappMessage += `Phone: ${phone}%0A`;
+
+          if (business) {
+            whatsappMessage += `Business: ${business}%0A`;
+          }
+
+          if (message) {
+            whatsappMessage += `Additional Info: ${message}%0A`;
+          }
+
+          // Redirect to WhatsApp
+          window.open(
+            `https://wa.me/2347077175192?text=${whatsappMessage}`,
+            "_blank"
+          );
+
+          // Reset cart and close modal
+          cart = [];
+          updateCart();
+          checkoutModal.classList.add("hidden");
+          cartPanel.classList.add("hidden");
+          checkoutForm.reset();
+        });
+
+        // WhatsApp form submission
+        whatsappForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const phone = document.getElementById("phone").value;
+          const email = document.getElementById("email").value;
+          const business = document.getElementById("business").value;
+          const message = document.getElementById("message").value;
+          const hearAbout = document.getElementById("hear-about").value;
+
+          // Create WhatsApp message
+          let whatsappMessage = `Hello Bizerrant!%0A%0A`;
+          whatsappMessage += `I have a special request:%0A%0A`;
+          whatsappMessage += `My details:%0A`;
+          whatsappMessage += `Name: ${name}%0A`;
+          whatsappMessage += `Phone: ${phone}%0A`;
+          whatsappMessage += `Email: ${email}%0A`;
+
+          if (business) {
+            whatsappMessage += `Business: ${business}%0A`;
+          }
+
+          if (hearAbout) {
+            whatsappMessage += `Heard about you from: ${hearAbout}%0A`;
+          }
+
+          if (message) {
+            whatsappMessage += `Message: ${message}%0A`;
+          }
+
+          // Redirect to WhatsApp
+          window.open(
+            `https://wa.me/2347077175192?text=${whatsappMessage}`,
+            "_blank"
+          );
+
+          // Reset form
+          whatsappForm.reset();
+        });
+
+        // Slider controls
+        prevBtn.addEventListener("click", function () {
+          prevSlide();
+          resetInterval();
+        });
+
+        nextBtn.addEventListener("click", function () {
+          nextSlide();
+          resetInterval();
+        });
+
+        dots.forEach((dot) => {
+          dot.addEventListener("click", function () {
+            const slideIndex = parseInt(this.getAttribute("data-slide"));
+            goToSlide(slideIndex);
+          });
+        });
+
+        // Package slider controls
+        packagePrevBtn.addEventListener("click", prevPackageSlide);
+        packageNextBtn.addEventListener("click", nextPackageSlide);
+
+        // Admin panel functionality
+        setupAdminPanel();
+      }
+
+      // Admin Panel Setup
+      function setupAdminPanel() {
+        // Package editor
+        const packageEditor = document.getElementById("package-editor");
+
+        packages.forEach((pkg) => {
+          const packageEditorItem = document.createElement("div");
+          packageEditorItem.className = "border rounded-lg p-4";
+          packageEditorItem.innerHTML = `
+                    <h4 class="font-bold mb-2">${pkg.name}</h4>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="block text-sm">Price (₦)</label>
+                            <input type="number" value="${
+                              pkg.price
+                            }" class="package-price w-full p-2 border rounded" data-id="${
+            pkg.id
+          }">
+                        </div>
+                        <div>
+                            <label class="block text-sm">Duration</label>
+                            <input type="text" value="${
+                              pkg.duration
+                            }" class="package-duration w-full p-2 border rounded" data-id="${
+            pkg.id
+          }">
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <label class="block text-sm">Features (comma separated)</label>
+                        <textarea class="package-features w-full p-2 border rounded" data-id="${
+                          pkg.id
+                        }" rows="3">${pkg.features.join(", ")}</textarea>
+                    </div>
+                    <div class="mt-2 flex justify-between">
+                        <div>
+                            <input type="checkbox" id="featured-${pkg.id}" ${
+            pkg.featured ? "checked" : ""
+          } class="package-featured mr-2" data-id="${pkg.id}">
+                            <label for="featured-${pkg.id}">Featured</label>
+                        </div>
+                        <button class="update-package bg-primary text-white px-3 py-1 rounded text-sm" data-id="${
+                          pkg.id
+                        }">Update</button>
+                    </div>
+                `;
+          packageEditor.appendChild(packageEditorItem);
+        });
+
+        // Update package event listeners
+        document.querySelectorAll(".update-package").forEach((button) => {
+          button.addEventListener("click", function () {
+            const packageId = parseInt(this.getAttribute("data-id"));
+            updatePackage(packageId);
+          });
+        });
+
+        // Update contact info
+        document
+          .getElementById("update-contact")
+          .addEventListener("click", function () {
+            const whatsappNumber =
+              document.getElementById("whatsapp-number").value;
+            const callNumber = document.getElementById("call-number").value;
+            const email1 = document.getElementById("email-1").value;
+            const email2 = document.getElementById("email-2").value;
+
+            // In a real application, you would save this to a database
+            // For this demo, we'll just show an alert
+            alert("Contact information updated successfully!");
+          });
+      }
+
+      function updatePackage(packageId) {
+        const packageIndex = packages.findIndex((p) => p.id === packageId);
+        if (packageIndex === -1) return;
+
+        const priceInput = document.querySelector(
+          `.package-price[data-id="${packageId}"]`
+        );
+        const durationInput = document.querySelector(
+          `.package-duration[data-id="${packageId}"]`
+        );
+        const featuresInput = document.querySelector(
+          `.package-features[data-id="${packageId}"]`
+        );
+        const featuredInput = document.querySelector(
+          `.package-featured[data-id="${packageId}"]`
+        );
+
+        packages[packageIndex].price = parseInt(priceInput.value);
+        packages[packageIndex].duration = durationInput.value;
+        packages[packageIndex].features = featuresInput.value
+          .split(",")
+          .map((f) => f.trim());
+        packages[packageIndex].featured = featuredInput.checked;
+
+        // Re-render packages
+        renderPackages();
+
+        // Show success message
+        alert("Package updated successfully!");
+      }
+    </script>
+  </body>
+</html>
